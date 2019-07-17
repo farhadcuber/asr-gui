@@ -7,4 +7,4 @@ def AudioConverter(file):
         out = file
 
     os.system('ffmpeg -y -i %s -acodec pcm_s16le -ac 1 -ar 16000 recordings/%s.tmp.wav' % (file, out))
-    return '%s.tmp.wav' % out
+    return 'recordings/%s.tmp.wav' % out
