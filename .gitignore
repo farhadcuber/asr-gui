@@ -1,7 +1,7 @@
-icons/
 *.wav
 *.pyc
-recordings/
+recordings/*
+!recordings/.gitkeep
 env/
 *.ui
 .vscode/
