@@ -3,3 +3,5 @@ icons/
 *.pyc
 recordings/
 env/
+*.ui
+.vscode/
