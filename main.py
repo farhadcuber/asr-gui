@@ -42,7 +42,8 @@ class IntractiveUI:
 
     def startClicked(self):
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("icons/red.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("icons/red.png")), \
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.recButton.setIcon(icon)
         self.ui.recButton.setIconSize(QtCore.QSize(50, 50))
 
@@ -53,7 +54,8 @@ class IntractiveUI:
 
     def stopClicked(self):
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8("icons/record-512.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("icons/record-512.png")), \
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.recButton.setIcon(icon)
         self.ui.recButton.setIconSize(QtCore.QSize(50, 50))
 
