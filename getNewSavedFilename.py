@@ -16,7 +16,7 @@ def getFilename(dir):
     
     num = getMinUnusedNaturalNum(usedNums)
 
-    return 'rec%s.wav' % str(num).zfill(4)
+    return join(dir, 'rec%s.wav' % str(num).zfill(4))
 
 
 def getMinUnusedNaturalNum(nums):
