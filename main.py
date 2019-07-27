@@ -1,9 +1,13 @@
 import sys, os
+
 from PyQt4 import QtCore, QtGui
+
 from gui import Ui_Form
 from MicrophoneRecorder import MicrophoneRecorder
 from Player import Player
 from PlayerDone import PlayerDone
+import getNewSavedFilename
+
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -47,8 +51,10 @@ class IntractiveUI:
         self.ui.recButton.setIcon(icon)
         self.ui.recButton.setIconSize(QtCore.QSize(50, 50))
 
-        self.recorder = MicrophoneRecorder(self.pathToSpeech, rate=44100, \
-            chunksize=1024)
+        self.openedFile = getFilename(self.pathToSpeech)
+
+        self.recorder = MicrophoneRecorder(self.openedFile, \
+            rate=44100, chunksize=1024)
             
         self.setText('[REC] Recording . . .')
 
@@ -60,24 +66,19 @@ class IntractiveUI:
         self.ui.recButton.setIconSize(QtCore.QSize(50, 50))
 
         self.recorder.close()
-        self.setText('[DONE] Saved to %s.' % self.pathToSpeech)
-        self.openedFile = ''
+        self.setText('[DONE] Saved to %s.' % self.openedFile)
+
 
     def playClicked(self):
         if (self.player == None or self.player.stop) and \
         (self.recorder == None or self.recorder.stop):
-            
-            if self.openedFile == '':
-                fileToPlay = self.pathToSpeech
-            else:
-                fileToPlay = self.openedFile
 
-            if not os.path.isfile(fileToPlay):
-                self.setText('[ERR] %s doesn\'t exists.' % fileToPlay)
+            if not os.path.isfile(self.openedFile):
+                self.setText('[ERR] %s doesn\'t exists.' % self.openedFile)
 
-            self.player = Player(fileToPlay, self, rate=44100)
+            self.player = Player(self.openedFile, self, rate=44100)
 
-            self.setText('[PLAY] %s Playing . . .' % fileToPlay)
+            self.setText('[PLAY] %s Playing . . .' % self.openedFile)
 
         elif self.player != None and self.player.pause:
             self.player.stream.start_stream()
@@ -112,7 +113,7 @@ ui.setupUi(Form)
 Form.setFixedSize(Form.size())
 
 
-intractiveUI = IntractiveUI(ui, 'recordings/rec01.wav')
+intractiveUI = IntractiveUI(ui, os.path.join(os.getcwd(), 'recordings'))
 Form.destroyed.connect(atExit)
 
 Form.show()
