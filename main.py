@@ -6,7 +6,7 @@ from gui import Ui_Form
 from MicrophoneRecorder import MicrophoneRecorder
 from Player import Player
 from PlayerDone import PlayerDone
-import getNewSavedFilename
+from getNewSavedFilename import getFilename
 
 
 try:
